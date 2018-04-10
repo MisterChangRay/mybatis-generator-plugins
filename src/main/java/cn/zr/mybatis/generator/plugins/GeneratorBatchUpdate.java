@@ -8,7 +8,7 @@ import java.util.List;
  * @author Created by rui.zhang on 2018/4/9.
  * @version ver1.0
  * @email misterchangray@hotmail.com
- * @description 根据数据库注释对实体类增加swagger2文档注解
+ * @description 鏍规嵁鏁版嵁搴撴敞閲婂瀹炰綋绫诲鍔爏wagger2鏂囨。娉ㄨВ
  */
 public class GeneratorBatchUpdate  extends PluginAdapter {
     public boolean validate(List<String> list) {
