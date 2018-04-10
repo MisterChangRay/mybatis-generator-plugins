@@ -14,6 +14,9 @@
         <plugin type="cn.zr.mybatis.generator.plugins.GeneratorBatchInsert">
         </plugin>
         <plugin type="cn.zr.mybatis.generator.plugins.GeneratorBatchDelete">
+            <property name="enableLogicalDelete" value="true" />
+            <property name="tableColName" value="isdeal" />
+            <property name="javaPropName" value="isDeal" />
         </plugin>
 
         <commentGenerator>

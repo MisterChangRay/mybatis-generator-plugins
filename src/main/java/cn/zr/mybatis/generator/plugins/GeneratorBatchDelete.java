@@ -53,19 +53,21 @@ public class GeneratorBatchDelete  extends PluginAdapter {
      */
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
-        String logicalDelete = this.getContext().getProperty("logicalDeleteBy");
+        String enableLogicalDelete = this.getProperties().getProperty("enableLogicalDelete");
+        String tableColName = this.getProperties().getProperty("tableColName");
+        String javaPropName = this.getProperties().getProperty("javaPropName");
 
-        String where = "";
-        if(null == logicalDelete) {
-            //根据主键删除
-            String key1 = null;
-            List<IntrospectedColumn> keyColms = introspectedTable.getPrimaryKeyColumns();
-            if(null != keyColms) key1 = keyColms.get(0).getActualColumnName();
-            if(null == key1) {
-                logger.debug("(批量删除插件):" + introspectedTable.getMyBatis3XmlMapperFileName() + "增加batchDelete实现方法失败，table:" + introspectedTable.getFullyQualifiedTable() + "没有主键");
-                return  false;
-            }
 
+        //根据主键删除
+        String key1 = null;
+        List<IntrospectedColumn> keyColms = introspectedTable.getPrimaryKeyColumns();
+        if(null != keyColms) key1 = keyColms.get(0).getActualColumnName();
+        if(null == key1) {
+            logger.debug("(批量删除插件):" + introspectedTable.getMyBatis3XmlMapperFileName() + "增加batchDelete实现方法失败，table:" + introspectedTable.getFullyQualifiedTable() + "没有主键");
+            return  false;
+        }
+
+        if(null == enableLogicalDelete || "false" == enableLogicalDelete) {
             // 1. batchInsert
             XmlElement batchInsertEle = new XmlElement("delete");
             batchInsertEle.addAttribute(new Attribute("id", BATCH_DELETE));
@@ -74,8 +76,7 @@ public class GeneratorBatchDelete  extends PluginAdapter {
 
             batchInsertEle.addElement(new TextElement("delete from " + introspectedTable.getFullyQualifiedTableNameAtRuntime()));
 
-            batchInsertEle.addElement(new TextElement(" where "));
-
+            batchInsertEle.addElement(new TextElement(" where " + key1 + " in "));
 
             // 添加foreach节点
             XmlElement foreachElement = new XmlElement("foreach");
@@ -85,15 +86,44 @@ public class GeneratorBatchDelete  extends PluginAdapter {
             foreachElement.addAttribute(new Attribute("open", "("));
             foreachElement.addAttribute(new Attribute("close", ")"));
 
+            foreachElement.addElement(new TextElement("#{item." + key1 + "}"));
+            batchInsertEle.addElement(foreachElement);
 
-            where = where.substring(0, where.length() - 4);
-            batchInsertEle.addElement(new TextElement(where));
             document.getRootElement().addElement(batchInsertEle);
 
-        } else {
+        } else if(null != tableColName && null != javaPropName) {
             //逻辑删除
 
+            // 1. batchInsert
+            XmlElement batchInsertEle = new XmlElement("update");
+            batchInsertEle.addAttribute(new Attribute("id", BATCH_DELETE));
+            // 参数类型
+            batchInsertEle.addAttribute(new Attribute("parameterType", "map"));
 
+            batchInsertEle.addElement(new TextElement("update " + introspectedTable.getFullyQualifiedTableNameAtRuntime()));
+
+            // 添加foreach节点
+            XmlElement foreachElement = new XmlElement("foreach");
+            foreachElement.addAttribute(new Attribute("collection", "list"));
+            foreachElement.addAttribute(new Attribute("item", "item"));
+            foreachElement.addAttribute(new Attribute("separator", ","));
+            foreachElement.addElement(new TextElement("set " + tableColName + " = #{item." + javaPropName + "}"));
+            batchInsertEle.addElement(foreachElement);
+
+            batchInsertEle.addElement(new TextElement(" where " + key1 + " in "));
+
+            // 添加foreach节点
+            XmlElement foreachElement2 = new XmlElement("foreach");
+            foreachElement2.addAttribute(new Attribute("collection", "list"));
+            foreachElement2.addAttribute(new Attribute("item", "item"));
+            foreachElement2.addAttribute(new Attribute("separator", ","));
+            foreachElement2.addAttribute(new Attribute("open", "("));
+            foreachElement2.addAttribute(new Attribute("close", ")"));
+
+            foreachElement2.addElement(new TextElement("#{item." + key1 + "}"));
+            batchInsertEle.addElement(foreachElement2);
+
+            document.getRootElement().addElement(batchInsertEle);
         }
 
         logger.debug("(批量删除插件):" + introspectedTable.getMyBatis3XmlMapperFileName() + "增加batchDelete实现方法。");
