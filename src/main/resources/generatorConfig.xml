@@ -7,13 +7,13 @@
     <classPathEntry location="D:\programForDev\mysql-connector-java-5.1.45\mysql-connector-java-5.1.45-bin.jar"/>
     <context id="testTables" targetRuntime="MyBatis3" >
         <!-- 数据Model属性对应Column获取插件        -->
-        <plugin type="cn.zr.mybatis.generator.plugins.GeneratorSwagger2Doc">
+        <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
             <property name="apiModelAnnotationPackage" value="io.swagger.annotations.ApiModel" />
             <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />
         </plugin>
-        <plugin type="cn.zr.mybatis.generator.plugins.GeneratorBatchInsert">
+        <plugin type="mybatis.generator.plugins.GeneratorBatchInsert">
         </plugin>
-        <plugin type="cn.zr.mybatis.generator.plugins.GeneratorBatchDelete">
+        <plugin type="mybatis.generator.plugins.GeneratorBatchDelete">
             <property name="enableLogicalDelete" value="true" />
             <property name="tableColName" value="isdeal" />
             <property name="javaPropName" value="isDeal" />

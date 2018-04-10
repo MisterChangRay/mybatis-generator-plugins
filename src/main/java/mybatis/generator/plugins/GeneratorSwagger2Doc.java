@@ -1,4 +1,4 @@
-package cn.zr.mybatis.generator.plugins;
+package mybatis.generator.plugins;
 
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.java.Field;
