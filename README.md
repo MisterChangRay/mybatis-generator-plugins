@@ -1,7 +1,7 @@
 # myBatisGeneratorPlugins
 一些mybatis-generator扩展插件集合
 
-#### 目前实现以下功能
+#### 已实现功能
 - 自动添加swagger2注解到实体类
 
 
