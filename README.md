@@ -47,9 +47,9 @@ add dependency to your pom.xml on mybatis node. like:
     </plugins>
   </build>
 ```
+-----------------------------------------------
 
-
-#### 自动添加swagger2注解到实体类
+#### 1. 自动添加swagger2注解到实体类
 generatorConfig.xml中增加插件配置
 ``` xml
         <!-- 自动为entity生成swagger2文档-->
