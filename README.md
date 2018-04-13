@@ -6,9 +6,18 @@
 
 
 
+#### maven引用
+```xml
+ <dependency>
+    <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
+    <artifactId>myBatisGeneratorPlugins</artifactId>
+    <version>1.0</version>
+  </dependency>
+```
+
 
 #### 怎么使用 how to use
-增加依赖到你的pom.xml文件 mybatis 节点下,如下：
+增加依赖到你的pom.xml文件 mybatis 节点下,如下：<br>
 add dependency to your pom.xml on mybatis node. like:
 ``` xml
 <!-- maven  -->
