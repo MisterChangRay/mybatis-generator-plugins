@@ -18,7 +18,7 @@
             <property name="tableColName" value="isdeal" />
             <property name="javaPropName" value="isDeal" />
         </plugin>
-
+        <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
