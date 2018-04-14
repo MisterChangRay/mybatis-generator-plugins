@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * @author Created by rui.zhang on 2018/4/9.
  * @version ver1.0
- * @email misterchangray@hotmail.com
- * @description 对entity的set函数进行扩展，在设置完毕后返回当前实例;方便链式调用
+ * email misterchangray@hotmail.com
+ * description 对entity的set函数进行扩展，在设置完毕后返回当前实例;方便链式调用
  */
 public class ExtendEntitySetter extends PluginAdapter {
     private static final Logger logger = LoggerFactory.getLogger(GeneratorBatchInsert.class);

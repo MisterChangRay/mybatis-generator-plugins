@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="D:\programForDev\mysql-connector-java-5.1.45\mysql-connector-java-5.1.45-bin.jar"/>
+    <classPathEntry location="D:\programsForDev\mysql-connector-java-5.1.26-bin.jar"/>
     <context id="testTables" targetRuntime="MyBatis3" >
         <!-- 数据Model属性对应Column获取插件        -->
         <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
@@ -13,12 +13,8 @@
         </plugin>
         <plugin type="mybatis.generator.plugins.GeneratorBatchInsert">
         </plugin>
-        <plugin type="mybatis.generator.plugins.GeneratorBatchDelete">
-            <property name="enableLogicalDelete" value="true" />
-            <property name="tableColName" value="isdeal" />
-            <property name="javaPropName" value="isDeal" />
-        </plugin>
         <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
+
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
