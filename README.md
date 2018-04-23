@@ -17,7 +17,30 @@
 ```
 
 
-#### 怎么使用 how to use
+-----------------------------------------------
+### 详细介绍
+
+#### 1. 自动添加swagger2注解到实体类
+自动为`entity`类生成`swagger2`文档注解，注解内容为数据库`comment`内容
+``` xml
+        <!-- 自动为entity生成swagger2文档-->
+        <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
+          <property name="apiModelAnnotationPackage" value="io.swagger.annotations.ApiModel" />
+          <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />
+        </plugin>
+```
+#### 2.扩展entity的`set`方法
+扩展entity的`set`方法；返回当前`this`实例，方便链式调用
+``` xml
+        <!-- 扩展entity的set方法-->
+        <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
+```
+
+
+-------------------------------------------------
+
+
+#### 怎么引入到项目中
 增加依赖到你的pom.xml文件 mybatis 节点下,如下：<br>
 add dependency to your pom.xml on mybatis node. like:
 ``` xml
@@ -48,27 +71,8 @@ add dependency to your pom.xml on mybatis node. like:
     </plugins>
   </build>
 ```
------------------------------------------------
-### 详细介绍
 
-#### 1. 自动添加swagger2注解到实体类
-自动为`entity`类生成`swagger2`文档注解，注解内容为数据库`comment`内容
-``` xml
-        <!-- 自动为entity生成swagger2文档-->
-        <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
-          <property name="apiModelAnnotationPackage" value="io.swagger.annotations.ApiModel" />
-          <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />
-        </plugin>
-```
-#### 2.扩展entity的`set`方法
-扩展entity的`set`方法；返回当前`this`实例，方便链式调用
-``` xml
-        <!-- 扩展entity的set方法-->
-        <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
-```
-
-
--------------------------------------------------
+-------------------------------------
 
 
 ####  runtime environment
