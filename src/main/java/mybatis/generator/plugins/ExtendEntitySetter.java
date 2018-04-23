@@ -17,7 +17,7 @@ import java.util.List;
  * description 对entity的set函数进行扩展，在设置完毕后返回当前实例;方便链式调用
  */
 public class ExtendEntitySetter extends PluginAdapter {
-    private static final Logger logger = LoggerFactory.getLogger(GeneratorBatchInsert.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExtendEntitySetter.class);
 
     public boolean validate(List<String> list) {
         return true;
