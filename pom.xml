@@ -7,7 +7,7 @@
     <name>myBatisGeneratorPlugins</name>
     <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
     <artifactId>myBatisGeneratorPlugins</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2</version>
     <url>https://github.com/MisterChangRay/mybatis-generator-plugins</url>
     <description>some mybatis-generator-plugin extend plugin</description>
     <packaging>jar</packaging>

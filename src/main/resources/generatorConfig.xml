@@ -6,22 +6,21 @@
 <generatorConfiguration>
     <classPathEntry location="D:\programsForDev\mysql-connector-java-5.1.26-bin.jar"/>
     <context id="testTables" targetRuntime="MyBatis3" >
-        <!-- 数据Model属性对应Column获取插件        -->
+        <!-- 数据Model属性对应Column获取插件
         <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
             <property name="apiModelAnnotationPackage" value="io.swagger.annotations.ApiModel" />
             <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />
         </plugin>
-        <plugin type="mybatis.generator.plugins.GeneratorBatchInsert">
-        </plugin>
-        <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
 
+        <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
+  -->
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/playground?characterEncoding=UTF-8&amp;useSSL=true&amp;serverTimezone=GMT%2B8"
+                        connectionURL="jdbc:mysql://localhost:3306/common_core?characterEncoding=UTF-8&amp;useSSL=true&amp;serverTimezone=GMT%2B8"
                         userId="root"
                         password="Zr12356789">
         </jdbcConnection>
