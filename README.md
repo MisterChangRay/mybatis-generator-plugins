@@ -9,11 +9,12 @@
 
 #### maven引用
 ```xml
- <dependency>
+<!-- https://mvnrepository.com/artifact/com.github.misterchangray.mybatis.generator.plugins/myBatisGeneratorPlugins -->
+<dependency>
     <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
     <artifactId>myBatisGeneratorPlugins</artifactId>
-    <version>1.0</version>
-  </dependency>
+    <version>1.2</version>
+</dependency>
 ```
 
 
@@ -59,11 +60,12 @@ add dependency to your pom.xml on mybatis node. like:
           <overwrite>true</overwrite>
         </configuration>
         <dependencies>
-          <!--  us plugin  -->
+          <!--  use plugin  -->
+          <!-- https://mvnrepository.com/artifact/com.github.misterchangray.mybatis.generator.plugins/myBatisGeneratorPlugins -->
           <dependency>
-            <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
-            <artifactId>myBatisGeneratorPlugins</artifactId>
-            <version>1.0</version>
+              <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
+              <artifactId>myBatisGeneratorPlugins</artifactId>
+              <version>1.2</version>
           </dependency>
   
         </dependencies>
