@@ -36,6 +36,21 @@
         <!-- 扩展entity的set方法-->
         <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
 ```
+#### 3.针对第1点中的配置存在的坑，新增了新的方式
+ApiModel的value值默认为实体类的简称，不同包名下面如果有同名类将会冲突；
+value值不能包含.，否则会造成swagger获取api-docs时，$ref变成"com.xxx"从而去读取当前服务器上的文件，进而请求并不存在的资源：localhost:8080/v3/com.xxx，相关规范可以参考：[https://swagger.io/docs/specification/using-ref/](https://swagger.io/docs/specification/using-ref/)
+
+新增了一个属性useFullPathName，用于控制ApiModel value值，以下是新的配置（使用时需要注释掉旧的配置）：
+``` xml
+        <!-- 注意plugin名称，需要注释掉GeneratorSwagger2Doc -->
+        <plugin type="mybatis.generator.plugins.GenerateSwagger3Doc">
+            <!--是否使用完整路径作为apiModel 的value值，默认为false，设置为true时为避免swagger $ref报错将路径名称中的.替换为了$-->
+            <property name="useFullPathName" value="false"/>
+            <property name="apiModelAnnotationPackage" value="io.swagger.annotations.ApiModel" />
+            <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />
+        </plugin>
+```
+
 
 
 -------------------------------------------------
