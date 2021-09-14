@@ -22,9 +22,6 @@ public class GeneratorSwagger2Doc extends PluginAdapter {
     @Override
     public boolean modelFieldGenerated(Field field, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
         String classAnnotation = "@ApiModel(value=\"" + topLevelClass.getType()  + "\")";
-        if(!topLevelClass.getAnnotations().contains(classAnnotation)) {
-            topLevelClass.addAnnotation(classAnnotation);
-        }
 
         String apiModelAnnotationPackage =  properties.getProperty("apiModelAnnotationPackage");
         String apiModelPropertyAnnotationPackage = properties.getProperty("apiModelPropertyAnnotationPackage");
@@ -37,6 +34,10 @@ public class GeneratorSwagger2Doc extends PluginAdapter {
             topLevelClass.addImportedType(apiModelAnnotationPackage);
             topLevelClass.addImportedType(apiModelPropertyAnnotationPackage);
             field.addAnnotation("@ApiModelProperty(value=\"" + introspectedColumn.getJavaProperty() + introspectedColumn.getRemarks() + "\")");
+
+            if(!topLevelClass.getAnnotations().contains(classAnnotation)) {
+                topLevelClass.addAnnotation(classAnnotation);
+            }
         }
 
         String apiJavaDoc = properties.getProperty("apiModelJavaDoc", "false");
