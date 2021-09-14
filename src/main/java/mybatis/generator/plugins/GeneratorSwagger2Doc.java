@@ -35,6 +35,15 @@ public class GeneratorSwagger2Doc extends PluginAdapter {
         topLevelClass.addImportedType(apiModelPropertyAnnotationPackage);
 
         field.addAnnotation("@ApiModelProperty(value=\"" + introspectedColumn.getJavaProperty() + introspectedColumn.getRemarks() + "\")");
+
+        String apiJavaDoc = properties.getProperty("apiModelJavaDoc", "false");
+        if("TRUE".equals(apiJavaDoc.toUpperCase())) {
+            field.addJavaDocLine("/**");
+            field.addJavaDocLine(introspectedColumn.getRemarks());
+            field.addJavaDocLine("*/");
+        }
+
+
         return super.modelFieldGenerated(field, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
     }
 }

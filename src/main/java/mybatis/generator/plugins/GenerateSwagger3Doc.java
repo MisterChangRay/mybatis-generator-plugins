@@ -10,8 +10,9 @@ import java.util.List;
 
 /**
  * @author Windman1320
- * @date 2021/09/03
- * @description 根据数据库注释对实体类生成注解，扩展支持swagger3.0，允许开启或者关闭注解生成
+ * date 2021/09/03
+ * description 根据数据库注释对实体类生成注解，扩展支持swagger3.0，允许开启或者关闭注解生成
+ *
  */
 public class GenerateSwagger3Doc extends PluginAdapter {
     /**
@@ -57,6 +58,13 @@ public class GenerateSwagger3Doc extends PluginAdapter {
 
         topLevelClass.addImportedType(apiModelAnnotationPackage);
         topLevelClass.addImportedType(apiModelPropertyAnnotationPackage);
+
+        String apiJavaDoc = properties.getProperty("apiModelJavaDoc", "false");
+        if("TRUE".equals(apiJavaDoc.toUpperCase())) {
+            field.addJavaDocLine("/**");
+            field.addJavaDocLine(introspectedColumn.getRemarks());
+            field.addJavaDocLine("*/");
+        }
 
         // 去掉了实体类Java属性
         field.addAnnotation("@ApiModelProperty(value=\"" + introspectedColumn.getRemarks() + "\")");
