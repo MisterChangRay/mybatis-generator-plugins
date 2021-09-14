@@ -61,7 +61,7 @@
             <!-- 启用生成 ApiModelProperty  -->
             <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />
             <!-- 启用只生成 java 注释 -->
-            <property name="onlyGeneratorJavaDoc" value="false"/>
+            <property name="apiModelJavaDoc" value="false"/>
             <!-- GenerateSwagger3Doc支持 是否使用完整路径作为apiModel 的value值，默认为false，设置为true时为避免swagger $ref报错将路径名称中的.替换为了$-->
             <property name="useFullPathName" value="false"/>
         </plugin>
