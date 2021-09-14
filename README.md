@@ -126,5 +126,5 @@ add dependency to your pom.xml on mybatis node. like:
 
 
 ##### 4. 感谢
-1. @Windman1320 Windman 
+1. @Windman1320
 
