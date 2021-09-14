@@ -8,7 +8,7 @@
 - 兼容swagger3 且 可以生成全包名路径
 
 #### 1.快速使用
-1. maven 在buid节点中引入本插件, 如下示例
+##### 1. maven 在buid节点中引入本插件, 如下示例
 ```xml
 <!-- maven  -->
 <build>
@@ -41,7 +41,7 @@
     </plugins>
   </build>
 ```
-2. 进行必要的生成配置
+##### 2. 进行必要的生成配置
 ```xml
 <!-- generatorConfig.xml， 此配置文件参考项目resource下同名文件,或者百度搜索配置  -->
 
@@ -77,7 +77,7 @@
 -------------------------------------------------
 
 
-#### 怎么引入到项目中
+#### 2. 怎么引入到项目中
 增加依赖到你的pom.xml文件 mybatis 节点下,如下：<br>
 add dependency to your pom.xml on mybatis node. like:
 ``` xml
@@ -123,3 +123,8 @@ add dependency to your pom.xml on mybatis node. like:
 - Maven 3.5.3
 - Git 2.14.1
 - Swagger 2.6.1
+
+
+##### 4. 感谢
+1. @Windman1320 Windman 
+
