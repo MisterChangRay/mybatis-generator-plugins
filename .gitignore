@@ -69,5 +69,4 @@ Thumbs.db
 
 # Other Files
 *.iml
-*.zip
-*.rar
+/src/test/
