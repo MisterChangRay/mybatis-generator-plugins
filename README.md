@@ -1,6 +1,12 @@
 # myBatisGeneratorPlugins
 本项目基于已存在的 mybatis-generator 做了扩展处理, 增加更多插件功能。
 
+[![GitHub (pre-)release](https://img.shields.io/github/release/misterchangray/mybatis-generator-plugins/all.svg)](https://github.com/misterchangray/mybatis-generator-plugins) 
+[![GitHub issues](https://img.shields.io/github/issues/misterchangray/mybatis-generator-plugins.svg)](https://github.com/misterchangray/mybatis-generator-plugins/issues) 
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/misterchangray/mybatis-generator-plugins.svg)](https://github.com/misterchangray/mybatis-generator-plugins/issues?q=is%3Aissue+is%3Aclosed) 
+[![GitHub](https://img.shields.io/github/license/misterchangray/mybatis-generator-plugins.svg)](./LICENSE)
+
+
 #### 已实现功能
 - 自动添加swagger2注解到实体类
 - 扩展set方法,返回this实例;方便链式调用
