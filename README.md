@@ -12,6 +12,17 @@
 - 扩展set方法,返回this实例;方便链式调用
 - 增加只添加java注释
 - 兼容swagger3 且 可以生成全包名路径
+- 增加`GenerateOpenApiDoc`支持Open API的注解
+  - @ApiModel -> @Schema
+  - @ApiModelProperty(value="") -> @Schema(value="")
+  ```xml
+      <plugin type="mybatis.generator.plugins.GenerateOpenApiDoc">
+          <!-- 启用只生成 java 注释 -->
+          <property name="javaDoc" value="false"/>
+          <!-- 是否使用完整路径作为 Schema 的 description 值，默认为false，设置为true时为避免swagger $ref报错将路径名称中的.替换为了$-->
+          <property name="useFullPathName" value="false"/>
+      </plugin>
+  ```
 
 #### 1.快速使用
 ##### 1. maven 在buid节点中引入本插件, 如下示例
