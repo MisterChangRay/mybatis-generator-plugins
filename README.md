@@ -51,7 +51,7 @@
           <dependency>
               <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
               <artifactId>myBatisGeneratorPlugins</artifactId>
-              <version>1.3</version>
+              <version>1.4</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -122,7 +122,7 @@ add dependency to your pom.xml on mybatis node. like:
           <dependency>
               <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
               <artifactId>myBatisGeneratorPlugins</artifactId>
-              <version>1.3</version>
+              <version>1.4</version>
           </dependency>
   
         </dependencies>
