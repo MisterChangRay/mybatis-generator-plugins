@@ -28,9 +28,10 @@ public class GeneratorSwagger2Doc extends PluginAdapter {
         if(null == apiModelAnnotationPackage) apiModelAnnotationPackage = "io.swagger.annotations.ApiModel";
         if(null == apiModelPropertyAnnotationPackage) apiModelPropertyAnnotationPackage = "io.swagger.annotations.ApiModelProperty";
 
-        String onlyGeneratorJavaDoc = properties.getProperty("onlyGeneratorJavaDoc", "false");
+        String generatorJavaDoc = properties.getProperty("generatorJavaDoc", "TRUE");
+        String generatorSwaggerDoc = properties.getProperty("generatorSwaggerDoc", "TRUE");
 
-        if("FALSE".equals(onlyGeneratorJavaDoc.toUpperCase())) {
+        if("FALSE".equals(generatorSwaggerDoc.toUpperCase())) {
             topLevelClass.addImportedType(apiModelAnnotationPackage);
             topLevelClass.addImportedType(apiModelPropertyAnnotationPackage);
             field.addAnnotation("@ApiModelProperty(value=\"" + introspectedColumn.getJavaProperty() + introspectedColumn.getRemarks() + "\")");
@@ -40,8 +41,7 @@ public class GeneratorSwagger2Doc extends PluginAdapter {
             }
         }
 
-        String apiJavaDoc = properties.getProperty("apiModelJavaDoc", "false");
-        if("TRUE".equals(apiJavaDoc.toUpperCase())) {
+        if("TRUE".equals(generatorJavaDoc.toUpperCase())) {
             field.addJavaDocLine("/**");
             field.addJavaDocLine(introspectedColumn.getRemarks());
             field.addJavaDocLine("*/");
