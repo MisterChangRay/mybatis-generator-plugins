@@ -21,6 +21,10 @@
           <property name="javaDoc" value="false"/>
           <!-- 是否使用完整路径作为 Schema 的 description 值，默认为false，设置为true时为避免swagger $ref报错将路径名称中的.替换为了$-->
           <property name="useFullPathName" value="false"/>
+          <!-- 仅适用于GenerateSwagger3Doc 是否使用数据表的注释(comment)作为 ApiModel 的 value 值，默认为false。如果设置为true,需要在jdbcConnection设置useInformationSchema为true 见2.1示例-->
+          <property name="useTableComment" value="true"/>
+          <!-- 仅适用于GenerateSwagger3Doc 是否在实体类字段上标注required，如@ApiModelProperty(required = true, value = "用户账号")，默认为false-->
+          <property name="markFieldRequired" value="true"/>
       </plugin>
   ```
 
@@ -94,11 +98,22 @@
 </generatorConfiguration>
 
 ```
-
+###### 2.1 使用数据表的注释(comment)作为 ApiModel 的 value 值时，配置如下
+```xml
+<!--数据库地址及登陆账号密码 改成你自己的配置-->
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL=""
+                userId=""
+                password="">
+            <!-- 设置 useInformationSchema 属性为 true,GenerateSwagger3Doc才能获取到表注释 -->
+          <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+```
 -------------------------------------------------
 
 
-#### 2. 怎么引入到项目中
+#### 3. 怎么引入到项目中
 增加依赖到你的pom.xml文件 mybatis 节点下,如下：<br>
 add dependency to your pom.xml on mybatis node. like:
 ``` xml
