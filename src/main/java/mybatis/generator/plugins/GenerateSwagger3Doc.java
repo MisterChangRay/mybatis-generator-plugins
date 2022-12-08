@@ -12,7 +12,6 @@ import java.util.List;
  * @author Windman1320
  * date 2021/09/03
  * description 根据数据库注释对实体类生成注解，扩展支持swagger3.0，允许开启或者关闭注解生成
- *
  */
 public class GenerateSwagger3Doc extends PluginAdapter {
     /**
@@ -34,23 +33,27 @@ public class GenerateSwagger3Doc extends PluginAdapter {
         String classAnnotation;
         // 是否使用完整类路径作为ApiModel的value，默认为false
         boolean useFullPathName = Boolean.parseBoolean(properties.getProperty("useFullPathName", "false"));
-        if (!useFullPathName) {
+        // 是否使用表的注释作为ApiModel的value，默认为false
+        boolean useTableComment = Boolean.parseBoolean(properties.getProperty("useTableComment", "false"));
+        if (useTableComment && !introspectedTable.getRemarks().equals("")) {
+            classAnnotation = "@ApiModel(value = \"" + introspectedTable.getRemarks().replace(".", "") + "\")";
+        } else if (!useFullPathName) {
             // 未设置value时swagger默认使用类名作为value
             classAnnotation = "@ApiModel";
         } else {
             // 替换掉完整路径名称中的.为其他符号
             String topLevelClassName = String.valueOf(topLevelClass.getType());
-            classAnnotation = "@ApiModel(value=\"" + topLevelClassName.replace(".", SPLIT_CHAR) + "\")";
+            classAnnotation = "@ApiModel(value = \"" + topLevelClassName.replace(".", SPLIT_CHAR) + "\")";
         }
 
         String generatorJavaDoc = properties.getProperty("generatorJavaDoc", "TRUE");
         String generatorSwaggerDoc = properties.getProperty("generatorSwaggerDoc", "TRUE");
 
-        if("TRUE".equals(generatorJavaDoc.toUpperCase())) {
+        if ("TRUE".equals(generatorJavaDoc.toUpperCase())) {
             generatorJavaDoc(field, introspectedColumn);
         }
-        if("TRUE".equals(generatorSwaggerDoc.toUpperCase())) {
-           generatorSwaggerAnnotation(topLevelClass, field, classAnnotation, introspectedColumn);
+        if ("TRUE".equals(generatorSwaggerDoc.toUpperCase())) {
+            generatorSwaggerAnnotation(topLevelClass, field, classAnnotation, introspectedColumn);
         }
 
         return super.modelFieldGenerated(field, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
@@ -59,6 +62,7 @@ public class GenerateSwagger3Doc extends PluginAdapter {
 
     /**
      * 生成swagger3相关注解
+     *
      * @param topLevelClass
      * @param field
      * @param classAnnotation
@@ -67,6 +71,8 @@ public class GenerateSwagger3Doc extends PluginAdapter {
     private void generatorSwaggerAnnotation(TopLevelClass topLevelClass, Field field, String classAnnotation, IntrospectedColumn introspectedColumn) {
         String apiModelAnnotationPackage = properties.getProperty("apiModelAnnotationPackage");
         String apiModelPropertyAnnotationPackage = properties.getProperty("apiModelPropertyAnnotationPackage");
+        // 是否在字段上标注required
+        boolean markFieldRequired = Boolean.parseBoolean(properties.getProperty("markFieldRequired", "false"));
         if (null == apiModelAnnotationPackage) {
             apiModelAnnotationPackage = "io.swagger.annotations.ApiModel";
         }
@@ -80,11 +86,18 @@ public class GenerateSwagger3Doc extends PluginAdapter {
         topLevelClass.addImportedType(apiModelAnnotationPackage);
         topLevelClass.addImportedType(apiModelPropertyAnnotationPackage);
         // 去掉了实体类Java属性
-        field.addAnnotation("@ApiModelProperty(value=\"" + introspectedColumn.getRemarks() + "\")");
+        // 根据字段是否允许为null判定是否为必需字段
+        if (markFieldRequired && !introspectedColumn.isNullable()) {
+            field.addAnnotation("@ApiModelProperty(required = true, value = \"" + introspectedColumn.getRemarks() + "\")");
+        } else {
+            field.addAnnotation("@ApiModelProperty(value = \"" + introspectedColumn.getRemarks() + "\")");
+        }
+
     }
 
     /**
      * 生成java文档注释
+     *
      * @param field
      * @param introspectedColumn
      */
